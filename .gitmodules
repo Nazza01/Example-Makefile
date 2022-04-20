@@ -1,0 +1,3 @@
+[submodule "libraries/lib42"]
+	path = libraries/lib42
+	url = git@github.com:Nazza01/lib42.git

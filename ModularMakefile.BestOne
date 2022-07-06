@@ -7,7 +7,6 @@ COMP_STD	=	-std=c++98
 COMP_FLAGS	=	-Wall -Wextra -Werror -g
 # 																			   #
 # **************************************************************************** #
-
 #				Progress Bar
 ifndef ECHO
 T := $(shell $(MAKE) $(MAKECMDGOALS) --no-print-directory \
@@ -21,8 +20,10 @@ endif
 
 #				Directories, Files, Flags and Utilities
 
+SRC_PATH	=	.
 HDR_DIR		=	./headers
 BUILD_DIR	=	./build
+DEPS_DIR	=	./deps
 
 SOURCES		=	$(shell find $(SRC_PATH) -name '*.$(SOURCE_EXT)')
 OBJECTS		=	$(SOURCES:$(SRC_PATH)/%.$(SOURCE_EXT)=$(BUILD_DIR)/%.o)
@@ -36,10 +37,9 @@ MKDIR		=	mkdir -p
 
 CLEAN_LST	=	$(PROGRAM) $(BUILD_DIR)
 
-SRC_PATH	=	.
 INCLUDES	=	-I $(HDR_DIR)
 
-# 				Start of Rules				
+# 				Start of Rules
 
 .DELETE_ON_ERROR: all c clean
 .PHONY: all c clean

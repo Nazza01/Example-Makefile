@@ -6,18 +6,18 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 20:23:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/08 14:27:56 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/08 15:02:53 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # **************************************************************************** #
 #							Edit this section								   #
-PROGRAM		:=	ProgName
+PROGRAM		:=	AniMorph
 COMPILER	?=	c++
 SOURCE_EXT	=	cpp
 COMP_STD	=	-std=c++98
-COMP_FLAGS	=	-Wall -Wextra -Werror -g
-VALGRND_NAME	=	ContainerName
+COMP_FLAGS	=	-g
+VALGRND_NAME=	vlgdex01
 # 																			   #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ INCLUDES	=	-I $(HDR_DIR)
 
 # 				Start of Rules
 
-.DELETE_ON_ERROR: all c clean
+.DELETE_ON_ERROR: all c clean cc val valgrind a attach vc valcl valclean
 .PHONY: all c clean
 
 # Default make command when [make] is run without any rule
@@ -70,9 +70,17 @@ $(PROGRAM): $(OBJECTS)
 # Cleans the files listed in clean list
 c clean:
 	@clear
-	@$(ECHO) $(CLEAN_LST) cleaned
+	@$(ECHO) Cleaning: $(CLEAN_LST)
 	@$(RM) $(CLEAN_LST)
 
+# Cleans the files listed and cleans any lingering valgrind docker containers
+cc:
+	@clear
+	@$(ECHO) Cleaning: $(CLEAN_LST)
+	@$(RM) $(CLEAN_LST)
+	@$(ECHO) Cleaning any prior valgrind containers with the name $(VALGRND_NAME)
+	@docker stop $(VALGRND_NAME) || true && docker rm $(VALGRND_NAME) || true
+	
 # Uses docker to make the desired named container
 # 	Stops any previous containers if they exist, removing any traces of them
 # 	Intialises the docker run command using the valgrind container

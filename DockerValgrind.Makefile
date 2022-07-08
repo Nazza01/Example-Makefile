@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 20:23:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/08 15:02:53 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/09 00:51:50 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ PROGRAM		:=	AniMorph
 COMPILER	?=	c++
 SOURCE_EXT	=	cpp
 COMP_STD	=	-std=c++98
-COMP_FLAGS	=	-g
-VALGRND_NAME=	vlgdex01
+COMP_FLAGS	=	-Wall -Wextra -Werror -g
+VALGRND_NAME=	val_ex01
 # 																			   #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC_DIR		=	./sources
 HDR_DIR		=	./headers
 BUILD_DIR	=	./build
 DEPS_DIR	=	./deps
+LOG_DIR		=	./logs
 
 SOURCES		=	$(shell find $(SRC_DIR) -name '*.$(SOURCE_EXT)')
 OBJECTS		=	$(SOURCES:$(SRC_DIR)/%.$(SOURCE_EXT)=$(BUILD_DIR)/%.o)
@@ -49,9 +50,15 @@ LDFLAGS		+=
 RM			=	rm -rf
 MKDIR		=	mkdir -p
 
-CLEAN_LST	=	$(PROGRAM) $(BUILD_DIR)
+CLEAN_LST	=	$(PROGRAM) $(BUILD_DIR) $(LOG_DIR)
 
 INCLUDES	=	-I $(HDR_DIR)
+
+DKR_OUT_LOG	=	dockerlog.txt
+VAL_OUT_LOG	=	valout.txt
+
+D_LOG_FILE	=	$(LOG_DIR)/$(DKR_OUT_LOG)
+V_LOG_FILE	=	$(LOG_DIR)/$(VAL_OUT_LOG)
 
 # 				Start of Rules
 
@@ -64,7 +71,7 @@ all: $(PROGRAM)
 # Creates the program based on the objects given
 $(PROGRAM): $(OBJECTS)
 	@$(ECHO) $@ ready to be run
-	@$(MKDIR) $(BUILD_DIR) 
+	@$(MKDIR) $(BUILD_DIR)
 	@$(COMPILER) $(OBJECTS) $(LDFLAGS) -o $@
 
 # Cleans the files listed in clean list
@@ -73,7 +80,7 @@ c clean:
 	@$(ECHO) Cleaning: $(CLEAN_LST)
 	@$(RM) $(CLEAN_LST)
 
-# Cleans the files listed and cleans any lingering valgrind docker containers
+# Cleans the files listed and cleans any lingering docker containers
 cc:
 	@clear
 	@$(ECHO) Cleaning: $(CLEAN_LST)
@@ -81,21 +88,26 @@ cc:
 	@$(ECHO) Cleaning any prior valgrind containers with the name $(VALGRND_NAME)
 	@docker stop $(VALGRND_NAME) || true && docker rm $(VALGRND_NAME) || true
 	
-# Uses docker to make the desired named container
-# 	Stops any previous containers if they exist, removing any traces of them
-# 	Intialises the docker run command using the valgrind container
-# 	Copies any files located from sources dir defined at the top of this file
-# 	Copies any files located from headers dir defined at the top of this file
-# 	Copies this Makefile into the valgrind container 
+# Uses docker to allow valgrind to detect any memory leaks in your program
 val valgrind:
+	@$(MKDIR) $(LOG_DIR)
 	@$(ECHO) Cleaning any prior valgrind containers with the name $(VALGRND_NAME)
-	@docker stop $(VALGRND_NAME) || true && docker rm $(VALGRND_NAME) || true
+	@docker stop $(VALGRND_NAME) > $(D_LOG_FILE) || true && docker rm $(VALGRND_NAME) >> $(D_LOG_FILE) || true >> $(D_LOG_FILE)
 	@$(ECHO) Creating valgrind docker named: $(VALGRND_NAME)
-	@docker run --name $(VALGRND_NAME) -dit karek/valgrind:latest
+	@docker run --name $(VALGRND_NAME) -dit karek/valgrind:latest >> $(D_LOG_FILE)
 	@$(ECHO) Copying $(HDR_DIR) $(SRC_DIR) to $(VALGRND_NAME)
-	@docker cp $(SRC_DIR) $(VALGRND_NAME):/valgrind/sources
-	@docker cp $(HDR_DIR) $(VALGRND_NAME):/valgrind/headers
-	@docker cp Makefile $(VALGRND_NAME):/valgrind/Makefile
+	@docker cp $(SRC_DIR) $(VALGRND_NAME):/valgrind/sources >> $(D_LOG_FILE)
+	@docker cp $(HDR_DIR) $(VALGRND_NAME):/valgrind/headers >> $(D_LOG_FILE)
+	@docker cp Makefile $(VALGRND_NAME):/valgrind/Makefile >> $(D_LOG_FILE)
+	@$(ECHO) Using makefile to create $(PROGRAM)
+	@docker exec $(VALGRND_NAME) make >> $(D_LOG_FILE)
+	@$(ECHO) Using valgrind to output results for $(PROGRAM)
+	@docker exec $(VALGRND_NAME) valgrind --log-file=$(VAL_OUT_LOG) ./$(PROGRAM) >> $(D_LOG_FILE)
+	@$(ECHO) Copying results to host machine
+	@docker cp $(VALGRND_NAME):/valgrind/$(VAL_OUT_LOG) $(V_LOG_FILE) >> $(V_LOG_FILE)
+	@$(ECHO) All done! 
+	@printf "To view the valgrind report, look in $(LOG_DIR) for $(VAL_OUT_LOG)\n"
+	@printf "To view docker container logs, look in $(LOG_DIR) for $(DKR_OUT_LOG)\n"
 
 # Attaches to the docker instance according to the set name
 a attach:

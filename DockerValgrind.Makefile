@@ -12,12 +12,12 @@
 
 # **************************************************************************** #
 #							Edit this section								   #
-PROGRAM		:=	AniMorph
+PROGRAM		:=	ProgName
 COMPILER	?=	c++
 SOURCE_EXT	=	cpp
 COMP_STD	=	-std=c++98
 COMP_FLAGS	=	-g
-VALGRND_NAME=	vlgdex01
+VALGRND_NAME	=	vlgdex01
 # 																			   #
 # **************************************************************************** #
 

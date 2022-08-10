@@ -6,14 +6,14 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 20:23:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/23 19:39:17 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/08/10 10:18:14 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 # **************************************************************************** #
 #							Edit this section								   #
-NAME		=	SetFire
+NAME		=	changeMe
 COMPILER	=	gcc
 SOURCE_EXT	=	c
 COMP_STD	=	-std=c99

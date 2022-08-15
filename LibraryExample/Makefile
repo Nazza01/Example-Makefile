@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:59:25 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/15 21:57:22 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/08/15 22:34:18 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ CP			=	cp
 #								Make Rules									   #
 ################################################################################
 .PHONY: all makelibs clean fclean re
+.SILENT:
 
 all: makelibs $(NAME)
 	$(call printout,$(COL_FINAL_MESSAGE),$(RUN_MSG),$(COL_FINAL_VAR),$(NAME))
@@ -63,7 +64,7 @@ makelibs:
 	$(MKDIR) $(IMPORTED_INC)
 	$(CP) $(LIB_INCS) $(IMPORTED_INC)
 	for dir in $(FIND_SUBDIR); do \
-		$(MAKE) -C "$${dir}" all; \
+		$(MAKE) -C "$${dir}" all SILENT_SUBMAKE=$(SILENT_SUBMAKE); \
 		printf "%s %18s $(COLOR_RESET)%s %8s$(COLOR_RESET)\n" $(COL_LIBS_MESSAGE) $(LIBS_MSG) $(COL_LIBS_VAR) $$dir; \
 	done
 

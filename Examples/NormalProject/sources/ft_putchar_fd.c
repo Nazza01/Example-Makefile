@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 09:35:08 by nervin            #+#    #+#             */
-/*   Updated: 2022/08/09 10:40:01 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 09:33:04 by nervin            #+#    #+#             */
+/*   Updated: 2022/08/16 21:54:37 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "main.h"
+
+#include <unistd.h>
 
 /*
 NAME
-	ft_lstlast
+	ft_putstr_fd - Write a character to a file.
 PARAMETERS
-	1.	The beginning of the list.
+	1.	The character to output
+	2.	The file descriptor on which to write.
 DESCRIPTION
-	Returns the last element of the list.
-	Iterates through the list as long as we don't reach the next element being
-	NULL, we traverse the list.
+	Outputs the character 'c' to the given file descriptor fd.
 RETURN VALUES
-	Last element of the list.
+	Does not return anything.
 */
-t_list	*ft_lstlast(t_list *lst)
+void	ft_putchar_fd(char c, int fd)
 {
-	t_list	*end;
-
-	end = lst;
-	if (lst == NULL)
-		return (NULL);
-	while (end->next != NULL)
-		end = end->next;
-	return (end);
+	write(fd, &c, 1);
 }

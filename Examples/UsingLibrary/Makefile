@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:59:25 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/16 10:39:39 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/08/16 22:10:21 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,6 @@ LLFLAGS		=	$(addprefix -l,$(LIBS_BASE))
 
 CXXFLAGS	+=	-MMD -MP
 MAKEFLAGS	+=	--no-print-directory
-
-PRINT_SRCS	=	$(subst $(SRC_DIR)/,,$(SRCS))
-PRINT_OBJS	=	$(subst $(BLD_DIR)/,,$(OBJS))
 
 ################################################################################
 #								Utilities									   #
@@ -92,4 +89,4 @@ re: all
 $(BLD_DIR)/%.o : $(SRC_DIR)/%.$(SRC_EXT)
 	$(MKDIR) $(@D)
 	$(CXX) $(CXXFLAGS) $(INC_DIR:%=-I %) -MMD -MP -c $< -o $@
-	$(call prlink,$(COL_LINK_MESSAGE),$(LINK_MSG),$(COL_LINK_VAR1),$(PRINT_SRCS),$(COL_LINK_VAR2),$(PRINT_OBJS))
+	$(call prlink,$(COL_LINK_MESSAGE),$(LINK_MSG),$(COL_LINK_VAR1),$<,$(COL_LINK_VAR2),$@)

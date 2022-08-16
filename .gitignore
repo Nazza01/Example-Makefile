@@ -8,3 +8,5 @@ testingLibrary
 
 *.o
 *.a
+
+null.d

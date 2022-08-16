@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:02:22 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/08/16 21:13:45 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/08/16 21:42:59 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 int	main(void)
 {
-	int		fd;
-	char	*line;
-
-	ft_putstr_fd("ft_putchar_fd\n", 1);
-	ft_putchar_fd('a', 1);
+	ft_putchar_fd('H', 1);
+	ft_putchar_fd('e', 1);
+	ft_putchar_fd('l', 1);
+	ft_putchar_fd('l', 1);
+	ft_putchar_fd('o', 1);
 	ft_putchar_fd('\n', 1);
-	fd = open("Makefile", O_RDONLY);
-	line = get_next_line(fd);
-	ft_printf("First Line: %s\n", line);
-	free(line);
-	ft_printf("Hello from ft_printf\n");
-	ft_printf("The absolute value of -100 is: %i\n", ft_abs(-100));
 	return (0);
 }

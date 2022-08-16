@@ -2,3 +2,9 @@
 
 build/
 
+includes/imported
+
+testingLibrary
+
+*.o
+*.a

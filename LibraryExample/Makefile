@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:59:25 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/15 22:34:18 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/08/16 10:39:39 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,6 @@ LIB_INCS	:=	$(shell find $(LIB_DIR) -name '*.$(INC_EXT)')
 
 LIBS_NAME	:=	$(basename $(notdir $(FIND_LIBS)))
 LIBS_BASE	:=	$(subst lib,,$(LIBS_NAME))
-
-LIBS_PREPEND:=	$(patsubst %, $(FIND_SUBDIR)/%.a, $(FIND_LIBS))
 
 LDFLAGS		=	$(addprefix -L, $(FIND_SUBDIR))
 LLFLAGS		=	$(addprefix -l,$(LIBS_BASE))

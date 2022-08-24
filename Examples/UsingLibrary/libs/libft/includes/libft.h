@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 10:35:42 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/08/09 14:12:55 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/08/24 09:26:08 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include	<limits.h>
 # include	<fcntl.h>
 # include	<stdbool.h>
+# include	<stdint.h>
 
 /****************************************/
 /*		Part 1 - Libc Functions			*/

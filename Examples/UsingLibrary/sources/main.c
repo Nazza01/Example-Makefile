@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:02:22 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/08/16 21:13:45 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/08/24 09:45:26 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	int		fd;
 	char	*line;
 
-	ft_putstr_fd("ft_putchar_fd\n", 1);
+	ft_putstr_fd("ft_putchar_fd: ", 1);
 	ft_putchar_fd('a', 1);
 	ft_putchar_fd('\n', 1);
 	fd = open("Makefile", O_RDONLY);

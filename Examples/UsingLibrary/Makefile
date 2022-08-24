@@ -6,13 +6,15 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:59:25 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/16 22:10:21 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/08/24 09:50:01 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include conf/colors.mk
 include conf/settings.mk
 include conf/functs.mk
+
+UNAME_S := $(shell uname -s)
 
 ################################################################################
 #						Files/Folders & Libraries							   #
@@ -24,9 +26,16 @@ DEPS		=	$(OBJS:.o=.d)
 
 IMPORTED_INC=	$(INC_DIR)/imported
 
+ifeq ($(UNAME_S),Linux)
+FIND_SUBDIR	:=	$(shell find $(LIB_DIR) -mindepth 1 -maxdepth 1 -type d)
+FIND_LIBS	:=	$(shell find $(LIB_DIR) -mindepth 1 -maxdepth 2 -name 'lib*.a' -type f)
+LIB_INCS	:=	$(shell find $(LIB_DIR) -name '*.$(INC_EXT)')
+endif
+ifeq ($(UNAME_S),Darwin)
 FIND_SUBDIR	:=	$(shell find $(LIB_DIR) -type d -depth 1)
 FIND_LIBS	:=	$(shell find $(LIB_DIR) -type f -depth 2 -name 'lib*.a')
 LIB_INCS	:=	$(shell find $(LIB_DIR) -name '*.$(INC_EXT)')
+endif
 
 LIBS_NAME	:=	$(basename $(notdir $(FIND_LIBS)))
 LIBS_BASE	:=	$(subst lib,,$(LIBS_NAME))

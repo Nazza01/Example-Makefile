@@ -10,3 +10,5 @@ testingLibrary
 *.a
 
 null.d
+
+.DS_Store

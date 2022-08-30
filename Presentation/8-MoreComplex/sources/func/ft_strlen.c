@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 20:37:41 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/08/25 22:32:37 by Nathanael        ###   ########.fr       */
+/*   Created: 2022/08/25 20:23:40 by Nathanael         #+#    #+#             */
+/*   Updated: 2022/08/25 22:18:40 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fullexample.h"
-#include <stdio.h>
 
-int	main(void)
+int	ft_strlen(char *str)
 {
-	printf("The length of Hello is: %i\n", ft_strlen("Hello"));
-	return (0);
+	int	len;
+
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
 }

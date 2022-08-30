@@ -6,7 +6,7 @@ SRC = ft_strlen.c main.c
 # OBJ = $(patsubst %.c,%.o,$(SRC))
 OBJ = $(SRC:%.c=%.o)
 
-CFLAGS += -Wall -Wextra -Werror -std=c99
+CFLAGS += -I . -Wall -Wextra -Werror -std=c99
 
 .PHONY: all $(NAME) clean fclean re
 .SILENT:

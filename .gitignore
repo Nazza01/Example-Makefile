@@ -1,9 +1,10 @@
 .vscode/
 build/
+objects/
+
 imported
 
 includes/imported
-
 testingLibrary
 
 *.o

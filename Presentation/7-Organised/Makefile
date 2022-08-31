@@ -33,7 +33,7 @@ all: $(NAME)
 # 	e.g A source file: sources/func/ft_strlen.c the rule would be
 # 	objects/funct/ft_strlen.o : sources/funct/ft_strlen
 $(OBJ): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	$(MKDIR) $(@D)
+	$(MKDIR) $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 	$(info $< compiled to $@)
 

@@ -6,8 +6,13 @@ NAME = outputStrLen
 # 	This command does the following
 # 		find in the directory '.' (current directory)
 # 		the name matching "*.c" (any .c file in the current directory or nested directories)
+
 # Define the sources list
-SRC = ft_strlen.c main.c
+FILE_NAMES :=	ft_strlen \
+				main
+
+# ft_strlen becomes ft_strlen.c
+SRC := $(addsuffix .c, $(FILE_NAMES))
 
 # Objects can also be written like so:
 # OBJ = $(patsubst %.c,%.o,$(SRC))

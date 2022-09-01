@@ -1,4 +1,0 @@
-# Define the rule helloworld
-#	Output "Hello world from filemake"
-helloworld:
-	@echo "Hello World from filemake"

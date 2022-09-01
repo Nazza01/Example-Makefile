@@ -6,8 +6,19 @@ SRC_DIR = sources
 HDR_DIR = headers
 OBJ_DIR = objects
 
-# Use the current shell implementation of find to find all sources
-SRC := $(shell find $(SRC_DIR) -name '*.c')
+
+# List the sources
+FILES :=	ft_strlen \
+			main
+
+# ft_strlen becomes sources/ft_strlen
+FILES_APPEND := $(addprefix $(SRC_DIR)/,$(FILES))
+
+# sources/ft_strlen becomes sources/ft_strlen.c
+SRC := $(addsuffix .c,$(FILES_APPEND))
+
+# Uses current shell to find the sources in the given directory (overrides source prepend and .c additions above)
+# SRC := $(shell find $(SRC_DIR) -name "*.c")
 
 # Define a new list of object files from the source files
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

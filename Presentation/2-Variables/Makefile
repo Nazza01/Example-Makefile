@@ -13,11 +13,11 @@ CFLAGS += -Wall -Wextra -Werror
 # 	all: $(NAME)
 #		echo "$<"
 # 	Would output sayhello
-all: $(NAME)
-	@echo "Compiling $<"
+all:
+	@echo "Compiling $(NAME)"
 	$(CC) $(CFLAGS) -c helloworld.c -o helloworld.o
-	@echo "Linking $<"
-	$(CC) $(CFLAGS) helloworld.o -o $<
+	@echo "Linking $(NAME)"
+	$(CC) $(CFLAGS) helloworld.o -o $(NAME)
 
 # Define the clean rule
 # $(RM) is a default variable containing rm -f

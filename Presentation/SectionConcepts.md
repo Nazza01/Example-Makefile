@@ -55,32 +55,22 @@
 - Covers how to setup a bonus rule in your makefile
 - Linking a library using ar -rcs as well as ranlib to index the library
 
-14-Bonus
+14-Organised
 -----------------------
-- Covers how to setup a bonus rule in your makefile
-- Linking a library using ar -rcs as well as ranlib to index the library
+- Showcases a bit more organised directory setup for the everything.
 
-
-========================================
-
-
-5-FullExample
+15-Nested
 -----------------------
-- Using previous example to showcase using a header file with the project
-- Fully commented each line and rule so its easier to follow along
-- Showcases multiple .c files
+- Allows for a sources folder having subfolders and we use a rule to create the same directory structure for the objects.
+- Also we need to define a specific syntax for the compilation stage so the program knows where each object is.
 
-6-Organised
+16-ProjectLayout
 -----------------------
-- Showcases info which is useful if printf or echo is not implemented on the os
-- Can follow a directory structure so sources are in seperate dirs and so are headers as well as objects 
+- Shows a project layout with a library
+- organised sources/objects/headers/includes
 
-7-NestedAllExtras
+17-TipsAndTricks
 -----------------------
-- Combines all aspects of the above examples to organise all your files into different subdirectories, you can now use subdirs inside a sources directory
-
-8-UsingLibrary
------------------------
-- Combines all aspects above
-- Allows for auto detection of libraries within the librarys directory (uses libft, get_next_line, ft_printf and personal)
-- Also includes os detection, importing .h files, recusive make, basename, subst, bash inside rule 
+- Shows including another makefile inside another for using variables across them.
+- Shows automatic detection of libraries and folders for it too
+- Shows ifeq for silent command progression

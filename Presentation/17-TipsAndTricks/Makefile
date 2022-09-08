@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 15:10:15 by Nathanael         #+#    #+#              #
-#    Updated: 2022/09/08 11:53:52 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/08 12:28:51 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ LLFLAGS			=	$(addprefix -l,$(LIBS_BASE))
 MKDIR			=	mkdir -p
 CP				=	cp
 
+# If we want the libraries to display progress we can set VERBOSE in the settings.mk
+# This allows for each step to show the progress of the build
 ifeq ($(VERBOSE),0)
 .SILENT:
 endif

@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 15:10:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/09/05 14:54:36 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 11:53:43 by nervin            #+#    #+#             */
+/*   Updated: 2022/08/09 10:40:01 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+/*
+NAME
+	ft_bzero - zero a byte string
+PARAMETERS
+	1.	The memory area to be written over.
+	2.	The amount of memory to be overwritten.
+DESCRIPTION
+	Erases the data in the n bytes of memory starting at the location pointed to
+	by s, by writing zeros (bytes containing '\0') to that area.
+RETURN VALUES
+	None.
+*/
+void	ft_bzero(void *s, size_t l)
 {
-	printf("\n");
-	printf("Hello from first\n");
-	printf("\n");
-	return (0);
+	ft_memset(s, 0, l);
 }

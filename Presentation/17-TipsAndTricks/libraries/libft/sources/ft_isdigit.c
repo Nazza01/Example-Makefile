@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first.c                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 15:10:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/09/05 14:54:36 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 09:28:32 by nervin            #+#    #+#             */
+/*   Updated: 2022/08/09 10:40:01 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+/*
+ft_isdigit takes in an integer c, compares with ASCII to see if the value is 
+between 0..9.
+If c is between 0 and 9, will return 1. Otherwise will return 0.
+*/
+int	ft_isdigit(int c)
 {
-	printf("\n");
-	printf("Hello from first\n");
-	printf("\n");
+	if (c >= 48 && c <= 57)
+		return (1);
 	return (0);
 }

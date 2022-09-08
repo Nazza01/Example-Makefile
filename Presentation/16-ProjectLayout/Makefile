@@ -1,22 +1,22 @@
 # Define project name, extensions, directories and compiler type
-NAME 				=	testingLibrary
+NAME 			=	testingLibrary
 
-SRC_DIR				=	sources
-INC_DIR				=	includes
-BLD_DIR				=	objects
-LIB_DIR				=	libraries
+SRC_DIR			=	sources
+INC_DIR			=	includes
+BLD_DIR			=	objects
+LIB_DIR			=	libraries
 
-LIBFT_DIR			=	$(LIB_DIR)/libft
-LIBFT_LIB			=	ft
+LIBFT_DIR		=	$(LIB_DIR)/libft
+LIBFT_LIB		=	ft
 
-CC					=	gcc
-CFLAGS				=	-Wall -Wextra -Werror -std=c99 -I $(INC_DIR) -I $(INC_DIR)/imported
+CC				=	gcc
+CFLAGS			=	-Wall -Wextra -Werror -std=c99 -I $(INC_DIR) -I $(INC_DIR)/imported
 
-SRCS		=	$(SRC_DIR)/main.c
-OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(BLD_DIR)/%.o)
+SRCS			=	$(SRC_DIR)/main.c
+OBJS			=	$(SRCS:$(SRC_DIR)/%.c=$(BLD_DIR)/%.o)
 
 # Directory to place library headers
-IMPORTED_INC=	$(INC_DIR)/imported
+IMPORTED_INC	=	$(INC_DIR)/imported
 
 # Detect and convert the following for use in linking step 
 # -L libs/dir	Look for the folder inside of the library - libs/dir
@@ -29,12 +29,12 @@ IMPORTED_INC=	$(INC_DIR)/imported
 # 	libftprintf.a		-L libs/ft_printf		-l ftprintf
 # 	libgnl.a			-L libs/get_next_line	-l gnl
 # 	libmlx.a			-L libs/mlx				-l mlx		#dont forget additional flags: -lm -framework OpenGL -framework AppKit
-LDFLAGS		=	-L $(LIBFT_DIR)
-LLFLAGS		=	-l $(LIBFT_LIB)
+LDFLAGS			=	-L $(LIBFT_DIR)
+LLFLAGS			=	-l $(LIBFT_LIB)
 
 # Utilities to use further on
-MKDIR		=	mkdir -p
-CP			=	cp
+MKDIR			=	mkdir -p
+CP				=	cp
 
 # Define the default rule which calls makelibs then $(NAME)
 all: makelibs $(NAME)

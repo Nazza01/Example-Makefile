@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first.c                                            :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 15:10:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/09/05 14:54:36 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 09:37:57 by nervin            #+#    #+#             */
+/*   Updated: 2022/08/09 10:40:01 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+/*
+ft_tolower
+	If c is an lowercase letter, ft_tolower returns the lowecase equivelent, 
+	otherwise it returns c.
+*/
+int	ft_tolower(int c)
 {
-	printf("\n");
-	printf("Hello from first\n");
-	printf("\n");
-	return (0);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
 }

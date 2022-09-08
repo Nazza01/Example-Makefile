@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first.c                                            :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 15:10:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/09/05 14:54:36 by Nathanael        ###   ########.fr       */
+/*   Created: 2022/04/30 23:04:13 by Nathanael         #+#    #+#             */
+/*   Updated: 2022/08/09 10:40:01 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_abs(int tofind)
 {
-	printf("\n");
-	printf("Hello from first\n");
-	printf("\n");
-	return (0);
+	if (tofind < 0)
+		return (-tofind);
+	return (tofind);
 }

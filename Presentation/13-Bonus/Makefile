@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 09:39:11 by nervin            #+#    #+#              #
-#    Updated: 2022/09/04 11:37:11 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/05 14:57:17 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,11 +59,8 @@ SRC_BON =	ft_lstnew.c \
 #						COMPILE, OBJECTS & DIRECTORIES						   #
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -std=c99
-AR 		= ar -rcs
-rm		= rm -f
 NAME	= libft.a
 NAME_BON= libft_bonus.a
-
 OBJ		= $(SRC:%.c=%.o)
 OBJ_BON	= $(SRC_BON:%.c=%.o)
 
@@ -85,7 +82,7 @@ $(OBJ_BON) $(OBJ): %.o : %.c
 # 	$^ refers to all of the files listed to the right of the rule (all objects)
 # 	ranlib is the utility to index all functions in the library for faster access
 $(NAME): $(OBJ)
-	$(AR) $@ $^
+	$(AR) -rcs $@ $^
 	ranlib $@
 
 # Use all bonus objects to create the libft.a bonus library
@@ -96,7 +93,7 @@ $(NAME): $(OBJ)
 # even though the contents of the library is different, this is simply for
 # demonstration purposes
 bonus: $(OBJ_BON)
-	$(AR) $(NAME_BON) $^
+	$(AR) -rcs $(NAME_BON) $^
 	ranlib $(NAME_BON)
 
 # Clean all object files in the current working directory

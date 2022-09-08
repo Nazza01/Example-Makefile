@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first.c                                            :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 15:10:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/09/05 14:54:36 by Nathanael        ###   ########.fr       */
+/*   Created: 2022/08/14 23:11:08 by Nathanael         #+#    #+#             */
+/*   Updated: 2022/09/04 14:15:14 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef MAIN_H
+# define MAIN_H
 
-int	main(void)
-{
-	printf("\n");
-	printf("Hello from first\n");
-	printf("\n");
-	return (0);
-}
+# include "imported/libft.h"
+
+#endif

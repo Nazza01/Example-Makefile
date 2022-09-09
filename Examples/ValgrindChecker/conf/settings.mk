@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 16:57:59 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/16 22:47:54 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/09 23:47:35 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ INC_DIR				=	includes
 BLD_DIR				=	build
 CON_DIR				=	conf
 
-CXX					=	gcc
-CXX_STD				=	c99
-CXXFLAGS			=	-Wall -Wextra -Werror -std=$(CXX_STD)
+CC					=	gcc
+CSTD				=	c99
+CFLAGS				=	-Wall -Wextra -Werror -std=$(CSTD)
 
 RUN_MSG				=	"READY"
 BUILD_MSG			=	"BUILDING"

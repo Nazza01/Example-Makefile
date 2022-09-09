@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:59:25 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/25 16:08:10 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/09 23:44:51 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,9 @@ SRC_DIR		=	src
 INC_DIR		=	inc
 BLD_DIR		=	build
 
-STANDARD	=	c99
-CXXFLAGS	=	-Wall -Wextra -Werror -std=$(STANDARD)
+CC			=	gcc
+CSTD		=	c99
+CFLAGS		=	-Wall -Wextra -Werror -std=$(CSTD)
 
 ################################################################################
 #						Files/Folders & Libraries							   #
@@ -33,10 +34,7 @@ CXXFLAGS	=	-Wall -Wextra -Werror -std=$(STANDARD)
 SRCS		=	$(shell find $(SRC_DIR) -name '*.$(SRC_EXT)')
 OBJS		=	$(SRCS:$(SRC_DIR)/%.$(SRC_EXT)=$(BLD_DIR)/%.o)
 
-LDFLAGS		=
-LLFLAGS		=
-
-CXXFLAGS	+=	-MMD -MP
+CFLAGS		+=	-MMD -MP
 MAKEFLAGS	+=	--no-print-directory
 
 ################################################################################
@@ -54,9 +52,16 @@ CP			=	cp
 .PHONY: all clean fclean re
 .SILENT:
 
+all: $(NAME)
+
+$(BLD_DIR)/%.o : $(SRC_DIR)/%.$(SRC_EXT)
+	$(MKDIR) $(@D)
+	$(CC) $(CFLAGS) $(INC_DIR:%=-I %) -c $< -o $@
+	$(info $< linked to $@)
+
 $(NAME): $(OBJS)
 	$(MKDIR) $(BLD_DIR)
-	$(CC) $(CXXFLAGS) $(OBJS) $(LDFLAGS) $(LLFLAGS) -o $@
+	$(CC) $(OBJS) $(LDFLAGS) $(LLFLAGS) -o $@
 	$(info $@ built successfully)
 
 clean:
@@ -68,8 +73,3 @@ fclean:
 	$(info $(BLD_DIR) cleaned successfully)
 
 re: clean fclean all
-
-$(BLD_DIR)/%.o : $(SRC_DIR)/%.$(SRC_EXT)
-	$(MKDIR) $(@D)
-	$(CC) $(CXXFLAGS) $(INC_DIR:%=-I %) -c $< -o $@
-	$(info $< linked to $@)

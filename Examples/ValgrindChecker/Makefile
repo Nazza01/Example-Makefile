@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:59:25 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/16 22:47:01 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/09 23:48:29 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,7 @@ SRCS		=	$(shell find $(SRC_DIR) -name '*.$(SRC_EXT)')
 OBJS		=	$(SRCS:$(SRC_DIR)/%.$(SRC_EXT)=$(BLD_DIR)/%.o)
 DEPS		=	$(OBJS:.o=.d)
 
-LDFLAGS		=
-LLFLAGS		=
-
-CXXFLAGS	+=	-MMD -MP
+CFLAGS		+=	-MMD -MP
 MAKEFLAGS	+=	--no-print-directory
 
 ################################################################################
@@ -46,9 +43,14 @@ CP			=	cp
 all: $(NAME)
 	$(call printout,$(COL_FINAL_MESSAGE),$(RUN_MSG),$(COL_FINAL_VAR),$(NAME))
 
+$(OBJS): $(BLD_DIR)/%.o : $(SRC_DIR)/%.$(SRC_EXT)
+	$(MKDIR) $(@D)
+	$(CC) $(CFLAGS) $(INC_DIR:%=-I %) -c $< -o $@
+	$(call prlink,$(COL_LINK_MESSAGE),$(LINK_MSG),$(COL_LINK_VAR1),$<,$(COL_LINK_VAR2),$@)
+
 $(NAME): $(OBJS)
 	$(MKDIR) $(BLD_DIR)
-	$(CXX) $(CXXFLAGS) $(OBJS) $(LDFLAGS) $(LLFLAGS) -o $@
+	$(CC) $(OBJS) $(LDFLAGS) $(LLFLAGS) -o $@
 	$(call printout,$(COL_BUILD_MESSAGE),$(BUILD_MSG),$(COL_BUILD_VAR),$@)
 
 clean:
@@ -64,11 +66,6 @@ cleanall: clean fclean
 re: clean fclean all
 
 -include $(DEPS)
-
-$(BLD_DIR)/%.o : $(SRC_DIR)/%.$(SRC_EXT)
-	$(MKDIR) $(@D)
-	$(CXX) $(CXXFLAGS) $(INC_DIR:%=-I %) -c $< -o $@
-	$(call prlink,$(COL_LINK_MESSAGE),$(LINK_MSG),$(COL_LINK_VAR1),$<,$(COL_LINK_VAR2),$@)
 
 memcheck: all
 	leaks -atExit -- ./$(NAME) | grep -E '(leak)'

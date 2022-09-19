@@ -6,81 +6,59 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 20:23:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/08/15 22:38:23 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/17 21:30:09 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-################################################################################
-#							Edit this section								   #
-NAME		=	libper.a
-COMPILER	=	gcc
-SOURCE_EXT	=	c
-COMP_STD	=	-std=c99
-COMP_FLAGS	=	-Wall -Wextra -Werror
-# 																			   #
-################################################################################
+NAME		=	libgnl.a
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror -std=c99
 
 ################################################################################
 #								Directories/Files							   #
 ################################################################################
-SRC_DIR		=	./sources
-HDR_DIR		=	./includes
-BUILD_DIR	=	./build
+SRCDIR		=	sources
+INCDIR		=	includes
+BLDDIR		=	build
 
-SOURCES		=	$(shell find $(SRC_DIR) -name '*.$(SOURCE_EXT)')
-OBJECTS		=	$(SOURCES:$(SRC_DIR)/%.$(SOURCE_EXT)=$(BUILD_DIR)/%.o)
-DEPS		=	$(OBJECTS:.o=.d)
+SRCS		=	$(shell find $(SRCDIR) -name '*.c')
+OBJS		=	$(SRCS:$(SRCDIR)/%.c=$(BLDDIR)/%.o)
+DEPS		=	$(OBJS:.o=.d)
 
-LOG			=	$(shell find . -name '*.log')
 ################################################################################
-#								Flags/Utilities								   #
+#								Utilities									   #
 ################################################################################
-CFLAGS		+=	$(COMP_STD) $(COMP_FLAGS)
-LDFLAGS		+=	
-INCLUDES	=	-I $(HDR_DIR)
+CFLAGS		+=	-MMD -MP -I $(INCDIR)
+LDFLAGS		=	
+LLFLAGS		=
 
-CLEAN_LST	=	$(NAME) $(LOG)
-FCLN_LST	=	$(BUILD_DIR) $(LOG)
-
-RM			=	rm -rf
-MKDIR		=	mkdir -p
-AR			=	ar -rcs
+AR			+=	-rcs
+RM			+=	-r
 RANLIB		=	ranlib
-
-BUILD_RULE	:=	$(AR)
-CLEAN_RULE	:=	$(RM)
-LINK_RULE	:=	$(COMPILER) $(CFLAGS) $(INCLUDES) -c -o
+MKDIR		=	mkdir -p
 ################################################################################
 #								Make Rules									   #
 ################################################################################
 .DELETE_ON_ERROR:
-.SILENT:
 
-ifeq ($(SILENT_SUBMAKE),0)
-all: printout $(NAME)
+ifeq ($(SILENT_SUBMAKE),1)
+.SILENT:
 endif
 
 all: $(NAME)
 
-printout:
-	$(info	$(NAME) successfully created)
+$(NAME): $(OBJS)
+	$(MKDIR) $(BLDDIR)
+	$(AR) $@ $^
+	$(RANLIB) $@
 
-$(NAME): $(OBJECTS)
-	$(MKDIR) $(BUILD_DIR)
-	$(BUILD_RULE) $@ $^
-	$(RANLIB) $(NAME)
+clean:
+	$(RM) $(NAME) $(OBJS)
 
-c clean:
-	$(CLEAN_RULE) $(CLEAN_LST) $(FCLN_LST)
-
-cc:
-	clear
-	$(MAKE) c
-
-r: c all
+re: clean all
 
 -include $(DEPS)
 
-$(BUILD_DIR)/%.o : $(SRC_DIR)/%.$(SOURCE_EXT)
+$(OBJS): $(BLDDIR)/%.o : $(SRCDIR)/%.c
 	$(MKDIR) $(@D)
-	$(LINK_RULE) $@ $<
+	$(CC) $(CFLAGS) -c $< -o $@

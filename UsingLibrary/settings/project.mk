@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 16:57:59 by Nathanael         #+#    #+#              #
-#    Updated: 2022/09/09 23:39:18 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/17 21:32:23 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME 				=	testingLibrary
 
-SILENT_SUBMAKE		=	1	# Set to 0 to output the progress of each subdirectory when making libraries
+SILENT_SUBMAKE		=	0	# Set to 0 to output the progress of each subdirectory when making libraries
 SRC_EXT				=	c
 INC_EXT				=	h
 

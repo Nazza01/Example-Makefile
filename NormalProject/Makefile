@@ -6,13 +6,13 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:59:25 by Nathanael         #+#    #+#              #
-#    Updated: 2022/09/09 23:46:22 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/09/17 21:50:51 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include conf/colors.mk
-include conf/settings.mk
-include conf/functs.mk
+include settings/colors.mk
+include settings/project.mk
+include settings/functs.mk
 
 ################################################################################
 #						Files/Folders & Libraries							   #
